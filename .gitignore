@@ -11,3 +11,4 @@ venv/
 *.iml
 *.ipr
 *.log
+src/test*.py
