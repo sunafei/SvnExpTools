@@ -1,0 +1,13 @@
+target/
+
+### IntelliJ IDEA ###
+.idea
+__pycache__/
+build/
+db_data/
+dist/
+venv/
+*.iws
+*.iml
+*.ipr
+*.log
