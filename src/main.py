@@ -160,6 +160,8 @@ def exp_update():
             target_path_full = update_path_root + target_code_base
             if not os.path.exists(target_path_full):
                 os.makedirs(target_path_full)
+            if not os.path.exists(source_path_full):
+                continue
             shutil.copy(source_path_full, target_path_full)
         # 如果是java文件，需要找到对应的class文件，如果有内容类 以 xxx$xxx.class体现
         # 无法确认svn路径是否为编译文件，采用向上递归法获取最近的
@@ -175,6 +177,8 @@ def exp_update():
             target = os.path.join(update_path_root_classes, source_path_part)
             if not os.path.exists(target):
                 os.makedirs(target)
+            if not os.path.exists(source):
+                continue
             shutil.copy(source, target)
         elif text.endswith(".java"):
             classes_path_prefix = os.path.join('WEB-INF', 'classes')
@@ -195,6 +199,8 @@ def exp_update():
                     target = os.path.join(update_path_root_classes, source_path_part)
                     if not os.path.exists(target):
                         os.makedirs(target)
+                    if not os.path.exists(source):
+                        continue
                     shutil.copy(source, target)
         elif text.endswith("log4j.properties") or text.endswith("globalMessages.properties"):
             # 如果是log4j.properties或者globalMessages.properties定位到WEB-INFO
@@ -209,6 +215,8 @@ def exp_update():
             target = os.path.join(update_path_root_classes, source_path_part)
             if not os.path.exists(target):
                 os.makedirs(target)
+            if not os.path.exists(source):
+                continue
             shutil.copy(source, target)
         else:  # 如果是其他文件 使用源码导出到和ROOT同级
             classes_path_root_other = source_path.get()
@@ -219,6 +227,8 @@ def exp_update():
             target = os.path.join(update_path_root_choice, source_path_part)
             if not os.path.exists(target):
                 os.makedirs(target)
+            if not os.path.exists(source):
+                continue
             shutil.copy(source, target)
         sysType = sys.platform
         if 'win' in sysType:  # windows和mac打开文件夹不一样
@@ -281,7 +291,7 @@ svn_help = exc_shell("svn help")
 if 'checkout' not in str(svn_help) and 'merge' not in str(svn_help):
     messagebox.showinfo("错误", "未安装svn命令环境！")
 
-github_link_str = 'https://github.com/sunafei/SvnExp.git'
+github_link_str = 'https://github.com/sunafei/SvnExpTools.git'
 win = t.Tk()
 win.title('svn导出更新包工具')
 # win.iconbitmap('icon.ico')
@@ -350,7 +360,7 @@ win_top.withdraw()  # 隐藏窗体
 tree_log = ttk.Treeview(win_top, show="headings")  # #创建树状对象
 tree_log["columns"] = ("动作", "受影响目录")  # #定义列
 tree_log.column("动作", width=50)  # #设置列
-tree_log.column("受影响目录", width=700)
+tree_log.column("受影响目录", width=1000)
 tree_log.heading("动作", text="动作")
 tree_log.heading("受影响目录", text="受影响目录")
 
