@@ -1,5 +1,5 @@
 <p align="center">
-  <img width="200" style="padding: 0 0" src="http://knowledgebase-oss.oss-cn-beijing.aliyuncs.com/star/svn_tools.svg">
+  <img width="200" src="http://knowledgebase-oss.oss-cn-beijing.aliyuncs.com/star/svn_tools.svg">
 </p>
 
 
