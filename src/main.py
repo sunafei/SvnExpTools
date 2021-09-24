@@ -231,7 +231,7 @@ def exp_update():
                 continue
             shutil.copy(source, target)
         sysType = sys.platform
-        if 'win' in sysType:  # windows和mac打开文件夹不一样
+        if 'win' in sysType and 'darwin' != sysType:  # windows和mac打开文件夹不一样
             os.startfile(update_path_root_choice)  # mac下不支持
         else:
             subprocess.call(["open", update_path_root_choice])
@@ -295,7 +295,11 @@ github_link_str = 'https://github.com/sunafei/SvnExpTools.git'
 win = t.Tk()
 win.title('svn导出更新包工具')
 # win.iconbitmap('icon.ico')
-win.geometry('770x440')
+sysType = sys.platform
+if 'win' in sysType and 'darwin' != sysType:  # windows和mac打开文件夹不一样
+    win.geometry('770x440')
+else:
+    win.geometry('870x400')
 win.resizable(0, 0)
 
 source_path = t.StringVar()
@@ -317,9 +321,6 @@ distdir_btn = t.Button(win, heigh=1, width=10, text='选择', command=select_cla
 load_btn = t.Button(win, text='加载提交记录', command=load_log, width=15)
 # close = t.Button(win, text='关闭', command=close_event, width=15)
 
-
-# close.grid(row=8, column=2, columnspan=2, pady=5, padx=20)
-
 tree = ttk.Treeview(win, show="headings")  # #创建表格对象
 tree["columns"] = ("版本", "日期", "作者", "注释")  # #定义列
 tree.column("版本", width=100)  # #设置列
@@ -332,10 +333,7 @@ tree.heading("日期", text="日期")
 tree.heading("作者", text="作者")
 tree.heading("注释", text="注释")
 
-tree.grid(row=10, column=0, columnspan=4, pady=5, padx=10)
-
 exp_btn = t.Button(win, text='导出更新包', command=exp_update, width=15)
-exp_btn.grid(row=11, column=1, columnspan=2, pady=2, padx=20)
 
 github_link = t.Label(win, text=github_link_str,
                       font=Font(family='Microsoft YaHei', size=-12, underline=True),
@@ -344,12 +342,14 @@ github_link.bind("<Button-1>", openUrl)
 # 布局
 srcdir_label.grid(row=1, column=0, pady=5, sticky=t.E)
 srcdir_text.grid(row=1, column=1, columnspan=2, pady=5)
-srcdir_btn.grid(row=1, column=3, pady=5)
+srcdir_btn.grid(row=1, column=3, padx=20, pady=5)
 distdir_label.grid(row=2, column=0, pady=5, sticky=t.E)
 distdir_text.grid(row=2, column=1, columnspan=2, pady=5)
-distdir_btn.grid(row=2, column=3, pady=5)
+distdir_btn.grid(row=2, column=3, padx=20, pady=5)
 load_btn.grid(row=8, column=1, columnspan=2, pady=5, padx=20)
 url_text.grid(row=9, column=0, columnspan=4, pady=0, padx=1)
+tree.grid(row=10, column=0, columnspan=4, pady=5, padx=10)
+exp_btn.grid(row=11, column=1, columnspan=2, pady=2, padx=20)
 github_link.grid(row=12, column=0, columnspan=4, pady=2, padx=20, sticky=t.E)
 tree.bind('<Double-Button-1>', treeviewDoubleClick)
 
