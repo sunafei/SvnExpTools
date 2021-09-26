@@ -35,5 +35,6 @@ Pyinstaller -w -F main.spec
 ```
 
 ## 注意
-- 必须配置svn环境变量，可通过svn help检查命令是否有效
-- 因源码结构原因，逻辑并不适用于所有项目
+1. 必须配置svn环境变量，可通过svn help检查命令是否有效
+![svn path](http://knowledgebase-oss.oss-cn-beijing.aliyuncs.com/star/svnpathsetting.png)
+2. 因源码结构原因，逻辑并不适用于所有项目
