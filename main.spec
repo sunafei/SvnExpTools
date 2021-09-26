@@ -5,7 +5,7 @@ block_cipher = None
 
 
 a = Analysis(['src\\main.py'],
-             pathex=['C:\\work\\program\\py-space\\SvnExp'],
+             pathex=['C:\\work\\program\\py-space\\SvnExpTools'],
              binaries=[],
              datas=[],
              hiddenimports=['pkg_resources'],
