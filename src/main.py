@@ -278,7 +278,7 @@ def close_window():
 
 
 # 浏览器打开github地址l
-def open_url():
+def open_url(event):
     webbrowser.open_new(github_link_str)
 
 
